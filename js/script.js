@@ -65,13 +65,32 @@ function appendPageLinks(list) {
    mydiv.appendChild(mylist);
    let number_of_pages = list.length / 10 ;
 
+   function page_link_clicked(e) {
+      let page_list = mylist.getElementsByTagName('a');
+      let page_id = 0;
+      for (let i = 0; i < page_list.length;i++) {
+
+         if (page_list[i] === e.target) {
+
+            page_list[i].className = 'active';
+            page_id = i+1;
+
+         } else {
+            page_list[i].className = '';
+         }
+        
+      }
+      showPage(students,page_id);
+   }
+
    function add_a_element(li,page) {
       let element = document.createElement('a');
       element.href = '#';
       element.textContent = page;
+      if (page == 1) element.className = 'active';
+      element.addEventListener("click", page_link_clicked);
       li.appendChild(element);
    }
-
 
    for (let i = 0; i < number_of_pages;i++) {
       let element = document.createElement('li');
@@ -80,6 +99,6 @@ function appendPageLinks(list) {
    }
 }
 
-
+//.addEventListener("click", printQuote, false);
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
