@@ -47,6 +47,7 @@ function showPage(list,page) {
 }
 
 showPage(students,1);
+appendPageLinks(students);
 
 
 /*** 
@@ -54,7 +55,30 @@ showPage(students,1);
    functionality to the pagination buttons.
 ***/
 
+function appendPageLinks(list) {
 
+   let page_div = document.getElementsByClassName('page')[0];
+   let mydiv = document.createElement('div');
+   mydiv.className = 'pagination';
+   page_div.appendChild(mydiv);
+   let mylist = document.createElement('ul');
+   mydiv.appendChild(mylist);
+   let number_of_pages = list.length / 10 ;
+
+   function add_a_element(li,page) {
+      let element = document.createElement('a');
+      element.href = '#';
+      element.textContent = page;
+      li.appendChild(element);
+   }
+
+
+   for (let i = 0; i < number_of_pages;i++) {
+      let element = document.createElement('li');
+      add_a_element(element,i+1);
+      mylist.appendChild(element);
+   }
+}
 
 
 
